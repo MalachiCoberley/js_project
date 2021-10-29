@@ -1,6 +1,6 @@
 **Welcome to my Javascript Project: Double the Bubble Trouble(name definitely pending)**
 
-in Bubble trouble, the player attempts to pop all bubbles on the screen within a given time limit.
+in Double the Bubble Trouble, the player attempts to pop all bubbles on the screen within a given time limit.
 -they can only move left and right across the bottom plane of the screen 
 -they can only shoot straight up, requiring them to be underneath a bubble to pop it.
 -each time a bubble is popped, it divides into two smaller bubbles.
