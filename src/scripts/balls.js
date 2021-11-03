@@ -51,11 +51,25 @@ class Ball{
       if (bottom >= (510 - (this.game.player.shot.sizeCount * 9))) {
         this.game.player.shot.collided = true;
         this.split();
+        this.game.addScore(this.stage);
       }
     } else if (this.game.player.shot.pos_x + 10 >= left && this.game.player.shot.pos_x + 10 <= right) {
       if (bottom >= (510 - (this.game.player.shot.sizeCount * 9))) {
         this.game.player.shot.collided = true;
         this.split();
+        this.game.addScore(this.stage);
+      }
+    }
+
+    if ( this.game.player.pos_x + 10 >= left && this.game.player.pos_x + 10 <= right){
+      if (bottom >= 430) {
+        this.game.player.collided = true;
+        this.game.player.subtractLife();
+      }
+    } else if (this.game.player.pos_x + 30 >= left && this.game.player.pos_x + 30 <= right) {
+      if (bottom >= 430) {
+        this.game.player.collided = true;
+        this.game.player.subtractLife();
       }
     }
   };

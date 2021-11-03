@@ -12,6 +12,7 @@ class Player {
     this.shot = new Shot(this.pos_x, this.pos_y, this.ctx, this);
     this.game = game;
     this.image = document.getElementById('player');
+    this.collided = false;
   }
 
   draw(ctx){
@@ -59,6 +60,15 @@ class Player {
     if (this.activeShots === 0) {
       this.activeShots = 1;
       this.shot.fire(this.pos_x);
+    }
+  }
+
+  subtractLife() {
+    if (this.lives > 0) {
+      this.lives -= 1
+      this.collided = false;                                                               
+    } else {
+      // this.game.gameOver();
     }
   }
 

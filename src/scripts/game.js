@@ -1,5 +1,4 @@
 import Player from "./player"
-import Shot from "./shot"
 import Ball from "./balls"
 
 class Game {
@@ -11,6 +10,9 @@ class Game {
     this.player = new Player(ctx, this);
     this.balls = [];
     this.gameTime = 0;
+    this.score = 0;
+    this.lives = document.getElementById("life-count");
+    this.scoredisplay = document.getElementById("score-count");
   }
 
   start() {
@@ -32,6 +34,10 @@ class Game {
 
   createBall(ctx, x, y, game, stage, vel_mod) {
     this.balls.push(new Ball(ctx, x, y, game, stage, vel_mod));
+  }
+
+  addScore(scoreMod) {
+    this.score += 100 - (scoreMod * 10);
   }
 
   draw(ctx) {
@@ -66,6 +72,8 @@ class Game {
       this.player.shot.updatePos();
     }
     this.checkCollisions();
+    this.lives.innerHTML = this.player.lives;
+    this.scoredisplay.innerHTML = this.score;
   };
   
   checkCollisions() { 

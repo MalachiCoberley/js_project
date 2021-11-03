@@ -18,7 +18,9 @@ class Shot{
     ctx.beginPath();
 //growth rate is determined by the sizeCount multiplied by a number
     ctx.rect(this.pos_x, this.pos_y, 10, -9 * this.sizeCount);
-    ctx.stroke(); 
+    ctx.stroke();
+    ctx.fillStyle = "green"; 
+    ctx.fill(); 
   }
 
   updatePos(){
