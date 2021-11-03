@@ -62,14 +62,14 @@ class Ball{
     }
 
     if ( this.game.player.pos_x + 10 >= left && this.game.player.pos_x + 10 <= right){
-      if (bottom >= 430) {
+      if (bottom >= 430 && this.game.gameTime - this.game.player.lastHit > 30) {
         this.game.player.collided = true;
-        this.game.player.subtractLife();
+        this.game.player.subtractLife(this.game.gameTime);
       }
     } else if (this.game.player.pos_x + 30 >= left && this.game.player.pos_x + 30 <= right) {
-      if (bottom >= 430) {
+      if (bottom >= 430 && this.game.gameTime - this.game.player.lastHit > 30) {
         this.game.player.collided = true;
-        this.game.player.subtractLife();
+        this.game.player.subtractLife(this.game.gameTime);
       }
     }
   };

@@ -12,7 +12,7 @@ class Player {
     this.shot = new Shot(this.pos_x, this.pos_y, this.ctx, this);
     this.game = game;
     this.image = document.getElementById('player');
-    this.collided = false;
+    this.lastHit = 100;
   }
 
   draw(ctx){
@@ -63,10 +63,10 @@ class Player {
     }
   }
 
-  subtractLife() {
+  subtractLife(hitTime) {
     if (this.lives > 0) {
       this.lives -= 1
-      this.collided = false;                                                               
+      this.lastHit = hitTime;                                                               
     } else {
       // this.game.gameOver();
     }

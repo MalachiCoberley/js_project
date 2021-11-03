@@ -9,8 +9,9 @@ class Game {
     this.height = canvas.height;
     this.player = new Player(ctx, this);
     this.balls = [];
-    this.gameTime = 0;
+    this.gameTime = 60;
     this.score = 0;
+    this.level = 1;
     this.lives = document.getElementById("life-count");
     this.scoredisplay = document.getElementById("score-count");
   }
@@ -20,8 +21,14 @@ class Game {
     requestAnimationFrame(this.animate.bind(this));
     this.canvas.setAttribute("tabindex", 0);
     this.addListeners();
-    this.createBall(this.ctx, 75, 50, this, 5, 1);
+    this.startLevel();
   };
+
+  startLevel() {
+    for (let i = 0; i < this.level; i++) {
+      this.createBall(this.ctx, 75 + (i * 100), 50, this, 5, 1);
+    }
+  }
   
   addListeners() {
     this.canvas.addEventListener("keydown", (e) => {
@@ -74,11 +81,20 @@ class Game {
     this.checkCollisions();
     this.lives.innerHTML = this.player.lives;
     this.scoredisplay.innerHTML = this.score;
+    this.levelComplete();
+    this.gameTime += 1
   };
   
   checkCollisions() { 
     for (let i = 0; i < this.balls.length; i++){
       this.balls[i].isCollidedWith();
+    }
+  }
+
+  levelComplete() {
+    if (this.balls.length === 0) {
+      this.level += 1
+      this.startLevel();
     }
   }
 
