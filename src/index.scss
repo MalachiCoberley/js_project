@@ -1,0 +1,25 @@
+main {
+  margin: 2% auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 900px;
+  background-color: rgb(198, 255, 203);
+}
+canvas {
+  height: 500px;
+  width: 800px;
+  border: 2px solid black;
+}
+
+// #background {
+//   background-image: url("../assets/altBG.png");
+// }
+body {
+  background-image: url("../assets/bodyBG.png");
+
+}
+
+#player {
+  display: none;
+}
