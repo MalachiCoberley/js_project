@@ -1,3 +1,5 @@
+Play the game here: https://malachicoberley.github.io/js_project/
+
 **Welcome to my Javascript Project: Double the Bubble Trouble(name definitely pending)**
 
 in Double the Bubble Trouble, the player attempts to pop all bubbles on the screen within a given time limit.
