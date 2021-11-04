@@ -40,6 +40,9 @@ class Player {
         this.fireShot();
         e.preventDefault();
       }
+      if (e.code === "KeyP") {
+        this.game.pause();
+      }
     } else if (e.type === "keyup" && e.code !== "Space" ) {
       this.vel_x = 0;
     }

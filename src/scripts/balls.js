@@ -13,6 +13,7 @@ class Ball{
   draw(ctx){
     ctx.beginPath();
     ctx.arc(this.pos_x, this.pos_y, this.radius, 0, 2 * Math.PI);
+    ctx.lineWidth = 4;
     ctx.stroke(); 
     ctx.fillStyle = "yellow"; 
     ctx.fill();
@@ -75,7 +76,7 @@ class Ball{
   };
 
 
-  split() { if (this.stage !== 1) {
+  split() { if (this.stage !== 2) {
     this.game.createBall(this.context, this.pos_x - 20, this.pos_y, this.game, this.stage - 1, -1)
     this.game.createBall(this.context, this.pos_x + 20, this.pos_y, this.game, this.stage - 1, 1)
   }

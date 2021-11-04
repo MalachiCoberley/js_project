@@ -12,6 +12,8 @@ class Game {
     this.gameTime = 60;
     this.score = 0;
     this.level = 1;
+    this.highScore = 0;
+    this.paused = true;
   }
 
   start() {
@@ -21,6 +23,14 @@ class Game {
     this.addListeners();
     this.startLevel();
   };
+
+  pause() {
+    if (this.paused) {
+      this.paused = false;
+    } else {
+      this.paused = true;
+    }
+  }
 
   startLevel() {
     this.balls = [];
@@ -59,18 +69,20 @@ class Game {
     }
     this.player.shot.draw(ctx);
     ctx.font = '25px serif';
-    ctx.fillStyle = "Black"
+    ctx.fillStyle = "White"
     ctx.fillText('Lives', 5, 20);
     ctx.fillText(`Score: ${this.score}`, 200, 20);
+    ctx.fillText(`High Score: ${this.highScore}`, 400, 20);
     ctx.fillText(`Level: ${this.level}`, 700, 20);
   };
 
   animate(time) {
     const timeDelta = time - this.lastTime;
-  
-    this.step(timeDelta);
-    this.draw(this.ctx);
-    this.lastTime = time;
+    if (!this.paused) {
+      this.step(timeDelta);
+      this.draw(this.ctx);
+      this.lastTime = time;
+    }
   
     requestAnimationFrame(this.animate.bind(this));
   };
@@ -86,9 +98,16 @@ class Game {
       this.player.shot.updatePos();
     }
     this.checkCollisions();
+    this.checkHS();
     this.levelComplete();
     this.gameTime += 1
   };
+
+  checkHS() {
+    if (this.score > this.highScore) {
+      this.highScore = this.score;
+    }
+  }
   
   checkCollisions() { 
     for (let i = 0; i < this.balls.length; i++){
