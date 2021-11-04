@@ -44,8 +44,15 @@ h3 {
   width: 40%;
 }
 #title {
-  width: 600px;
-  padding: 1%;
+  display: flex;
+  flex-direction: row;
+  background-color: ivory;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 80%;
+  margin: 5px auto;
+  padding: 5px;
+  border: solid 3px darkgreen
 }
 
 #player {
