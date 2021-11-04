@@ -23,6 +23,10 @@ class Player {
     // ctx.stroke();
   }
 
+  drawLives(ctx, i) {
+    ctx.drawImage(this.image, 0, 0, 40, 40, 5 * (i * 6), 30, 30, 30);
+  }
+
   controller(e){
     // triggers move commands on key press. Halts player movement when no key is being pressed.
     if (e.type === "keydown") {
@@ -34,6 +38,7 @@ class Player {
       }
       if (e.code === "Space") {
         this.fireShot();
+        e.preventDefault();
       }
     } else if (e.type === "keyup" && e.code !== "Space" ) {
       this.vel_x = 0;
@@ -64,11 +69,11 @@ class Player {
   }
 
   subtractLife(hitTime) {
-    if (this.lives > 0) {
+    if (this.lives > 1) {
       this.lives -= 1
       this.lastHit = hitTime;                                                               
     } else {
-      // this.game.gameOver();
+      this.game.gameOver();
     }
   }
 
