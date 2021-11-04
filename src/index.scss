@@ -15,6 +15,7 @@ canvas {
 #background {
   background-image: url("../assets/canvBG.PNG");
   background-repeat: no-repeat;
+  background-position: center;
 }
 body {
   background-image: url("../assets/bodyBG.png");
@@ -26,7 +27,7 @@ section {
   background-color: ivory;
   justify-content: space-around;
   align-items: flex-start;
-  width: 80%;
+  width: 800px;
   margin: 5px auto;
   padding: 0 0 20px 0;
   border: solid 3px darkgreen
@@ -49,7 +50,7 @@ h3 {
   background-color: ivory;
   justify-content: space-around;
   align-items: flex-start;
-  width: 80%;
+  width: 790px;
   margin: 5px auto;
   padding: 5px;
   border: solid 3px darkgreen
