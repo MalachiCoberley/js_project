@@ -13,14 +13,18 @@ class Player {
     this.game = game;
     this.image = document.getElementById('player');
     this.lastHit = 100;
+    this.frame = 0;
   }
 
   draw(ctx){
-    ctx.drawImage(this.image, 0, 0, 40, 80, this.pos_x, this.pos_y, 40, 80);
-    //replaced this with a sprite
-    // ctx.beginPath();
-    // ctx.rect(this.pos_x, this.pos_y, 40, 80);
-    // ctx.stroke();
+    if (this.frame > 100) {
+      ctx.drawImage(this.image, 40, 80, 40, 80, this.pos_x, this.pos_y, 40, 80)
+      this.frame = 0;
+    } else if (this.frame > 50) {
+      ctx.drawImage(this.image, 0, 0, 40, 80, this.pos_x, this.pos_y, 40, 80);
+    } else if (this.frame <= 50) {
+      ctx.drawImage(this.image, 40, 80, 40, 80, this.pos_x, this.pos_y, 40, 80);
+    } else ctx.drawImage(this.image, 40, 80, 40, 80, this.pos_x, this.pos_y, 40, 80)
   }
 
   drawLives(ctx, i) {

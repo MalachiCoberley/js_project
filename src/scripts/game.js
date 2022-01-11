@@ -68,12 +68,17 @@ class Game {
       this.player.drawLives(ctx, i)
     }
     this.player.shot.draw(ctx);
-    ctx.font = '25px serif';
+    ctx.font = '25px sans-serif';
     ctx.fillStyle = "White"
+    var gradient = ctx.createLinearGradient(0, 0, this.canvas.width, 0);
+    gradient.addColorStop("0", "red");
+    gradient.addColorStop("0.5", "black");
+    gradient.addColorStop("1.0", "yellow");
+    ctx.fillStyle = gradient;
     ctx.fillText('Lives', 5, 20);
+    ctx.fillText(`Level: ${this.level}`, 700, 20);
     ctx.fillText(`Score: ${this.score}`, 200, 20);
     ctx.fillText(`High Score: ${this.highScore}`, 400, 20);
-    ctx.fillText(`Level: ${this.level}`, 700, 20);
   };
 
   animate(time) {
@@ -100,7 +105,8 @@ class Game {
     this.checkCollisions();
     this.checkHS();
     this.levelComplete();
-    this.gameTime += 1
+    this.gameTime += 1;
+    this.player.frame += 1;
   };
 
   checkHS() {
