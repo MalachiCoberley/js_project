@@ -5,6 +5,7 @@ main {
   align-items: center;
   width: 900px;
   background-color: rgb(198, 255, 203);
+  border-radius: 10px;
 }
 canvas {
   height: 500px;
@@ -19,7 +20,11 @@ canvas {
 }
 body {
   background-image: url("../assets/bodyBG.png");
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 850px;
+  height: 95vh;
 }
 section {
   display: flex;
@@ -62,5 +67,5 @@ h3 {
 
 .link {
   height:40px;
-  margin-right: 20px;
+  margin: 5px 10px;
 }
