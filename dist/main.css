@@ -1,3 +1,78 @@
-main{margin:0 auto;display:flex;flex-direction:column;align-items:center;width:900px;background-color:#c6ffcb;border-radius:10px}canvas{height:500px;width:800px;border:2px solid #000}#background{background-image:url("../assets/canvBG.PNG");background-repeat:no-repeat;background-position:center}body{background-image:url("../assets/bodyBG.png");display:flex;align-items:center;justify-content:center;min-height:850px;height:95vh}section{display:flex;flex-direction:row;background-color:ivory;justify-content:space-around;align-items:flex-start;width:800px;margin:5px auto;padding:0 0 20px 0;border:solid 3px #006400}p{margin:3px}h3{margin-bottom:5px}#info-text{width:40%}#title{display:flex;flex-direction:row;background-color:ivory;justify-content:space-around;align-items:flex-start;width:790px;margin:5px auto;padding:5px;border:solid 3px #006400}#player{display:none}.link{height:40px;margin:5px 10px}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+main {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 900px;
+  background-color: #c6ffcb;
+  border-radius: 10px;
+}
 
-/*# sourceMappingURL=main.css.map*/
+canvas {
+  height: 500px;
+  width: 800px;
+  border: 2px solid black;
+}
+
+#background {
+  background-image: url("../assets/canvBG.PNG");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+body {
+  background-image: url("../assets/bodyBG.png");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 850px;
+  height: 95vh;
+}
+
+section {
+  display: flex;
+  flex-direction: row;
+  background-color: ivory;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 800px;
+  margin: 5px auto;
+  padding: 0 0 20px 0;
+  border: solid 3px darkgreen;
+}
+
+p {
+  margin: 3px;
+}
+
+h3 {
+  margin-bottom: 5px;
+}
+
+#info-text {
+  width: 40%;
+}
+
+#title {
+  display: flex;
+  flex-direction: row;
+  background-color: ivory;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 790px;
+  margin: 5px auto;
+  padding: 5px;
+  border: solid 3px darkgreen;
+}
+
+#player {
+  display: none;
+}
+
+.link {
+  height: 40px;
+  margin: 5px 10px;
+}

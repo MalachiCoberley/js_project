@@ -1,3 +1,5 @@
+//TODO: Add at least 1 player power-up (star-power-esque use body as weapon and increase size or normal shield, speedup or buullet-time)
+
 import Shot from "./shot"
 
 class Player {
@@ -14,6 +16,7 @@ class Player {
     this.image = document.getElementById('player');
     this.lastHit = 100;
     this.frame = 0;
+    this.moves = {"left": 0, "right": 0};
   }
 
   draw(ctx){
@@ -34,27 +37,51 @@ class Player {
   controller(e){
     // triggers move commands on key press. Halts player movement when no key is being pressed.
     if (e.type === "keydown") {
+      this.handleKeyDown(e)
+      this.changePlayerVelocity()
+    } else if (e.type === "keyup") {
+      this.handelKeyUp(e)
+      this.changePlayerVelocity()
+    }
+  }
+
+  handleKeyDown(e){
+    if (e.code === "KeyA" || e.code === "ArrowLeft") {
+      this.moves["left"] = 1;
+    }else if (e.code === "KeyD" || e.code === "ArrowRight") {
+      this.moves["right"] = 1;
+    }else if (e.code === "Space") {
+      this.fireShot();
+      e.preventDefault();
+    }else if (e.code === "KeyP") {
+      this.game.pause();
+    }
+  }
+  
+  handelKeyUp(e){
+    if (e.code !== "Space" ) {
       if (e.code === "KeyA" || e.code === "ArrowLeft") {
-        this.moveLeft();
+        this.moves.left = 0;
+      } else if (e.code === "KeyD" || e.code === "ArrowRight") {
+        this.moves.right = 0;
       }
-      if (e.code === "KeyD" || e.code === "ArrowRight") {
-        this.moveRight();
-      }
-      if (e.code === "Space") {
-        this.fireShot();
-        e.preventDefault();
-      }
-      if (e.code === "KeyP") {
-        this.game.pause();
-      }
-    } else if (e.type === "keyup" && e.code !== "Space" ) {
       this.vel_x = 0;
     }
   }
 
-  moveLeft(){ this.vel_x = -4;}
-  
-  moveRight(){this.vel_x = 4;}
+  changePlayerVelocity(){
+    // Setting velocity to zero first removes weird hangups when pressing
+    // left and right at nearly the same time.
+    if (this.moves.left === 1) {
+      this.vel_x = 0;
+      this.vel_x = -4;
+    } else if (this.moves.right === 1) {
+      this.vel_x = 0;
+      this.vel_x = 4;
+    } else {
+      this.vel_x = 0;
+    }
+  }
 
   updatePos(){
     if (this.pos_x > 0 && this.pos_x < 760) {

@@ -1,3 +1,5 @@
+//TODO: Add at least 1 shot powerup. (dissolve entire bubble, anchor shot in place, triple-shot)
+
 class Shot{
   constructor(x, y, ctx, player) {
     this.pos_x = x;
