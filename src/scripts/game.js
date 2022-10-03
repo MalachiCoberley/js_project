@@ -1,5 +1,6 @@
 import Player from "./player"
 import Ball from "./balls"
+import Powerup from "./powerups"
 
 class Game {
   constructor(canvas, ctx) {
@@ -14,6 +15,8 @@ class Game {
     this.level = 1;
     this.highScore = 0;
     this.paused = true;
+    this.countOfBallsPopped = 0;
+    this.activePowerups = []
   }
 
   start() {
@@ -67,6 +70,11 @@ class Game {
     for (let i = 0; i < this.player.lives; i++) {
       this.player.drawLives(ctx, i)
     }
+    if (this.activePowerups.length > 0) {
+      for (let i = 0; i < this.activePowerups.length; i++){
+        this.activePowerups[i].draw(ctx);
+      }
+    }
     this.player.shot.draw(ctx);
     ctx.font = '25px sans-serif';
     ctx.fillStyle = "White"
@@ -93,6 +101,7 @@ class Game {
   };
 
   step(delta) {
+    //TODO probably figure out why I'm not using a time delta for frame rate?
     this.player.updatePos();
     if (this.balls.length > 0) {
       for (let i = 0; i < this.balls.length; i++){
@@ -114,10 +123,45 @@ class Game {
       this.highScore = this.score;
     }
   }
+
+  checkForPowerup(pos_x, pos_y) {
+    // Past the limit, odds of dropping a powerup increase 
+    const limit = 25
+    let diceRoll;
+    // Sometimes it spawns with a weirdly high balls-popped count
+    if (this.countOfBallsPopped > 200) {
+      this.countOfBallsPopped = 0;
+    }
+    if (this.countOfBallsPopped > limit) {
+      diceRoll = this.randomIntFromInterval(1, 2)
+      if (diceRoll === 2) {
+        this.activePowerups.push(new Powerup(this.ctx, this.game, pos_x, pos_y))
+        this.countOfBallsPopped = 0
+        console.log("FORCEDPOWERUP", this.countOfBallsPopped)
+      }
+    } else {
+      diceRoll = this.randomIntFromInterval(1, 20)
+      if (diceRoll === 8) {
+        this.activePowerups.push(new Powerup(this.ctx, this.game))
+        console.log("POWER", this.countOfBallsPopped)
+        this.countOfBallsPopped = 0
+      }
+    }
+    return true;
+  }
   
   checkCollisions() { 
+    let currentBallPosX;
+    let currentBallPosY;
     for (let i = 0; i < this.balls.length; i++){
-      this.balls[i].isCollidedWith();
+      currentBallPosX = this.balls[i].pos_x;
+      currentBallPosY = this.balls[i].pos_y;
+      
+      if(this.balls[i].isCollidedWith()) {
+        console.log("I have been collided")
+        this.countOfBallsPopped += 1
+        this.checkForPowerup(currentBallPosX, currentBallPosY)
+      }
     }
   }
 
@@ -134,6 +178,11 @@ class Game {
       this.level += 1
       this.startLevel();
     }
+  }
+
+  // TODO: util some shit for clarity
+  randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
 

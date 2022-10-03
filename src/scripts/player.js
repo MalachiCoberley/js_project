@@ -30,8 +30,8 @@ class Player {
     } else ctx.drawImage(this.image, 40, 80, 40, 80, this.pos_x, this.pos_y, 40, 80)
   }
 
-  drawLives(ctx, i) {
-    ctx.drawImage(this.image, 0, 0, 40, 40, 5 * (i * 6), 30, 30, 30);
+  drawLives(ctx, offset) {
+    ctx.drawImage(this.image, 0, 0, 40, 40, 5 * (offset * 6), 30, 30, 30);
   }
 
   controller(e){
