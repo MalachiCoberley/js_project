@@ -126,7 +126,7 @@ class Game {
 
   checkForPowerup(pos_x, pos_y) {
     // Past the limit, odds of dropping a powerup increase 
-    const limit = 25
+    const limit = 1
     let diceRoll;
     // Sometimes it spawns with a weirdly high balls-popped count
     if (this.countOfBallsPopped > 200) {
@@ -137,13 +137,11 @@ class Game {
       if (diceRoll === 2) {
         this.activePowerups.push(new Powerup(this.ctx, this.game, pos_x, pos_y))
         this.countOfBallsPopped = 0
-        console.log("FORCEDPOWERUP", this.countOfBallsPopped)
       }
     } else {
       diceRoll = this.randomIntFromInterval(1, 20)
       if (diceRoll === 8) {
         this.activePowerups.push(new Powerup(this.ctx, this.game))
-        console.log("POWER", this.countOfBallsPopped)
         this.countOfBallsPopped = 0
       }
     }
@@ -158,7 +156,6 @@ class Game {
       currentBallPosY = this.balls[i].pos_y;
       
       if(this.balls[i].isCollidedWith()) {
-        console.log("I have been collided")
         this.countOfBallsPopped += 1
         this.checkForPowerup(currentBallPosX, currentBallPosY)
       }

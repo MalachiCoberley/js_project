@@ -7,11 +7,17 @@ class Powerup{
   }
 
   draw(ctx){
+    let x = this.pos_x
+    let y = this.pos_y
     ctx.beginPath();
-    ctx.lineWidth = 4;
-    ctx.stroke(); 
-    ctx.fillStyle = "black"; 
-    ctx.fillRect(this.pos_x - 10, this.pos_y - 10, this.pos_x + 10, this.pos_y + 10);
+    ctx.lineJoin = 'miter';
+// Figure out how to move shape to location of ball
+    ctx.arc(x + 120, y + 88, 35, 5.74, 3.66, false);
+    ctx.bezierCurveTo(x + 100, y + 55, x + 122, y + 27.5, x + 120, y + 20);
+    ctx.bezierCurveTo(x + 122, y + 27.5, x + 121, y + 31.5, x + 150, y + 70)
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fill();
   }
 
 }
