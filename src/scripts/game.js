@@ -160,6 +160,9 @@ class Game {
         this.checkForPowerup(currentBallPosX, currentBallPosY)
       }
     }
+    if (this.activePowerups.length > 0 && this.activePowerups[0].isCollidedWith(this)) {
+      this.activePowerups.shift()
+    }
   }
 
   gameOver() {

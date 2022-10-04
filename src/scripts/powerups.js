@@ -4,20 +4,30 @@ class Powerup{
     this.game = game;
     this.pos_x = pos_x
     this.pos_y = pos_y
+    this.radius = 5
   }
 
   draw(ctx){
-    let x = this.pos_x
-    let y = this.pos_y
+    let x = this.pos_x - this.radius
+    let y = this.pos_y - this.radius
     ctx.beginPath();
+    ctx.fillStyle = "brown"
     ctx.lineJoin = 'miter';
-// Figure out how to move shape to location of ball
-    ctx.arc(x + 120, y + 88, 35, 5.74, 3.66, false);
-    ctx.bezierCurveTo(x + 100, y + 55, x + 122, y + 27.5, x + 120, y + 20);
-    ctx.bezierCurveTo(x + 122, y + 27.5, x + 121, y + 31.5, x + 150, y + 70)
-    ctx.closePath();
+    ctx.arc(this.pos_x, this.pos_y, this.radius, 0, 2 * Math.PI);
+    ctx.lineWidth = 4;
     ctx.stroke();
     ctx.fill();
+  }
+
+  // TODO: balls use a similar check for collision. could probably share logic and dry up.
+  isCollidedWith(game) {
+    let left = this.pos_x - this.radius;
+    let right = this.pos_x + this.radius;
+    let bottom = this.pos_y + this.radius
+
+    if ( game.player.pos_x >= left && game.player.pos_x <= right && bottom >= 430){
+        return true
+      }
   }
 
 }

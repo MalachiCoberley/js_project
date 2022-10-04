@@ -52,7 +52,6 @@ class Ball{
       if (bottom >= (510 - (this.game.player.shot.sizeCount * 9))) {
         this.game.player.shot.collided = true;
         this.split();
-        this.checkForPowerup()
         this.game.addScore(this.stage)
         return true;
       }
@@ -60,7 +59,6 @@ class Ball{
       if (bottom >= (510 - (this.game.player.shot.sizeCount * 9))) {
         this.game.player.shot.collided = true;
         this.split();
-        this.checkForPowerup()
         this.game.addScore(this.stage);
         return true;
       }
@@ -80,10 +78,6 @@ class Ball{
   };
 
   //TODO prolly split these out into a Utils folder of some kind.
-
-  checkForPowerup() {
-
-  }
 
   split() { if (this.stage !== 2) {
     this.game.createBall(this.context, this.pos_x - 20, this.pos_y, this.game, this.stage - 1, -1)
