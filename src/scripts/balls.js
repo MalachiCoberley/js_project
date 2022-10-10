@@ -44,6 +44,7 @@ class Ball{
   }
 
   isCollidedWith() {
+    // TODO: Balls shouldnt change the game state. This should be pulled out into game
     let left = this.pos_x - this.radius;
     let right = this.pos_x + this.radius;
     let bottom = this.pos_y + this.radius;

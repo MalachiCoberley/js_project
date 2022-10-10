@@ -16,7 +16,7 @@ class Game {
     this.highScore = 0;
     this.paused = true;
     this.countOfBallsPopped = 0;
-    this.activePowerups = []
+    this.activePowerups = {"unclaimed": null, "active": null}
   }
 
   start() {
@@ -70,10 +70,8 @@ class Game {
     for (let i = 0; i < this.player.lives; i++) {
       this.player.drawLives(ctx, i)
     }
-    if (this.activePowerups.length > 0) {
-      for (let i = 0; i < this.activePowerups.length; i++){
-        this.activePowerups[i].draw(ctx);
-      }
+    if (this.activePowerups["unclaimed"]) {
+      this.activePowerups["unclaimed"].draw(ctx);
     }
     this.player.shot.draw(ctx);
     ctx.font = '25px sans-serif';
@@ -111,6 +109,9 @@ class Game {
     if (this.player.shot.fired) {
       this.player.shot.updatePos();
     }
+    if (this.activePowerups["unclaimed"]) {
+      this.activePowerups["unclaimed"].updatePos();
+    }
     this.checkCollisions();
     this.checkHS();
     this.levelComplete();
@@ -135,13 +136,13 @@ class Game {
     if (this.countOfBallsPopped > limit) {
       diceRoll = this.randomIntFromInterval(1, 2)
       if (diceRoll === 2) {
-        this.activePowerups.push(new Powerup(this.ctx, this.game, pos_x, pos_y))
+        this.activePowerups["unclaimed"] = new Powerup(this.ctx, this.game, pos_x, pos_y)
         this.countOfBallsPopped = 0
       }
     } else {
       diceRoll = this.randomIntFromInterval(1, 20)
       if (diceRoll === 8) {
-        this.activePowerups.push(new Powerup(this.ctx, this.game))
+        this.activePowerups["unclaimed"] = new Powerup(this.ctx, this.game)
         this.countOfBallsPopped = 0
       }
     }
@@ -160,8 +161,8 @@ class Game {
         this.checkForPowerup(currentBallPosX, currentBallPosY)
       }
     }
-    if (this.activePowerups.length > 0 && this.activePowerups[0].isCollidedWith(this)) {
-      this.activePowerups.shift()
+    if (this.activePowerups["unclaimed"] && this.activePowerups["unclaimed"].isCollidedWith(this)) {
+      [this.activePowerups["active"], this.activePowerups["unclaimed"]] = [this.activePowerups["unclaimed"], null]
     }
   }
 

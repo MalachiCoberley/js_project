@@ -5,6 +5,13 @@ class Powerup{
     this.pos_x = pos_x
     this.pos_y = pos_y
     this.radius = 5
+    this.fallSpeed = 5
+    this.power = this.assignRandomPower()
+  }
+
+  assignRandomPower() {
+    const powers = ["extraLife", "thornShield", "shotgunShot"]
+    return powers[Math.floor(Math.random()*powers.length)];
   }
 
   draw(ctx){
@@ -25,9 +32,18 @@ class Powerup{
     let right = this.pos_x + this.radius;
     let bottom = this.pos_y + this.radius
 
-    if ( game.player.pos_x >= left && game.player.pos_x <= right && bottom >= 430){
+    if ( game.player.pos_x >= left - 40 && game.player.pos_x <= right && bottom >= 420){
+      console.log(game.activePowerups)
         return true
       }
+  }
+
+  updatePos() {
+    if (this.pos_y < 500 - this.radius) {
+      this.pos_y += this.fallSpeed;
+    } else if (this.pos_y > 500 - this.radius) {
+      this.pos_y = 500 - this.radius;
+    }
   }
 
 }
